@@ -1,0 +1,10 @@
+*.exe
+*.test
+.lint-cache
+*.tar.gz
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+uv.lock

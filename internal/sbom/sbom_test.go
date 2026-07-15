@@ -185,9 +185,15 @@ func TestComputeFileSHA256(t *testing.T) {
 func TestScanDirectory(t *testing.T) {
 	tmpDir := t.TempDir()
 	// Create some files
-	os.MkdirAll(filepath.Join(tmpDir, "subdir"), 0755)
-	os.WriteFile(filepath.Join(tmpDir, "file1.txt"), []byte("content1"), 0644)
-	os.WriteFile(filepath.Join(tmpDir, "subdir", "file2.txt"), []byte("content2"), 0644)
+	if err := os.MkdirAll(filepath.Join(tmpDir, "subdir"), 0755); err != nil {
+		t.Fatalf("failed to create subdir: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(tmpDir, "file1.txt"), []byte("content1"), 0644); err != nil {
+		t.Fatalf("failed to write file1.txt: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(tmpDir, "subdir", "file2.txt"), []byte("content2"), 0644); err != nil {
+		t.Fatalf("failed to write file2.txt: %v", err)
+	}
 
 	files, err := ScanDirectory(tmpDir)
 	if err != nil {

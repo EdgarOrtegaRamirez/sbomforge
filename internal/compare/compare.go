@@ -76,12 +76,12 @@ func Diff(a, b *sbom.SBOM) *DiffResult {
 // FormatDiff formats a DiffResult as a human-readable string.
 func FormatDiff(result *DiffResult) string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("SBOM Comparison Summary\n"))
-	sb.WriteString(fmt.Sprintf("=======================\n"))
-	sb.WriteString(fmt.Sprintf("Common packages:        %d\n", len(result.Common)))
-	sb.WriteString(fmt.Sprintf("Only in source SBOM:    %d\n", len(result.OnlyInLeft)))
-	sb.WriteString(fmt.Sprintf("Only in target SBOM:    %d\n", len(result.OnlyInRight)))
-	sb.WriteString(fmt.Sprintf("License differences:    %d\n", len(result.LicenseDiff)))
+	sb.WriteString("SBOM Comparison Summary\n")
+	sb.WriteString("=======================\n")
+	fmt.Fprintf(&sb, "Common packages:        %d\n", len(result.Common))
+	fmt.Fprintf(&sb, "Only in source SBOM:    %d\n", len(result.OnlyInLeft))
+	fmt.Fprintf(&sb, "Only in target SBOM:    %d\n", len(result.OnlyInRight))
+	fmt.Fprintf(&sb, "License differences:    %d\n", len(result.LicenseDiff))
 	sb.WriteString("\n")
 
 	if len(result.OnlyInLeft) > 0 {
@@ -124,9 +124,7 @@ func Merge(a, b *sbom.SBOM) *sbom.SBOM {
 	}
 
 	// Add all packages from A
-	for _, pkg := range a.Packages {
-		merged.Packages = append(merged.Packages, pkg)
-	}
+	merged.Packages = append(merged.Packages, a.Packages...)
 	// Add packages from B that aren't in A
 	bNames := make(map[string]bool)
 	for _, pkg := range a.Packages {

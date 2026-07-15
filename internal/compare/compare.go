@@ -87,7 +87,7 @@ func FormatDiff(result *DiffResult) string {
 	if len(result.OnlyInLeft) > 0 {
 		sb.WriteString("Removed packages:\n")
 		for _, name := range result.OnlyInLeft {
-			sb.WriteString(fmt.Sprintf("  - %s\n", name))
+			fmt.Fprintf(&sb, "  - %s\n", name)
 		}
 		sb.WriteString("\n")
 	}
@@ -95,7 +95,7 @@ func FormatDiff(result *DiffResult) string {
 	if len(result.OnlyInRight) > 0 {
 		sb.WriteString("Added packages:\n")
 		for _, name := range result.OnlyInRight {
-			sb.WriteString(fmt.Sprintf("  + %s\n", name))
+			fmt.Fprintf(&sb, "  + %s\n", name)
 		}
 		sb.WriteString("\n")
 	}
@@ -103,7 +103,7 @@ func FormatDiff(result *DiffResult) string {
 	if len(result.LicenseDiff) > 0 {
 		sb.WriteString("License changes:\n")
 		for _, ld := range result.LicenseDiff {
-			sb.WriteString(fmt.Sprintf("  %s: %s → %s\n", ld.Package, ld.Left, ld.Right))
+			fmt.Fprintf(&sb, "  %s: %s → %s\n", ld.Package, ld.Left, ld.Right)
 		}
 		sb.WriteString("\n")
 	}

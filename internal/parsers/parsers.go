@@ -13,39 +13,39 @@ type SPDXParser struct{}
 
 // SPDXDocument represents the root of an SPDX 2.3 document.
 type SPDXDocument struct {
-	SPDXID          string          `json:"spdxId"`
-	Name            string          `json:"name"`
-	Version         string          `json:"spdxVersion"`
-	CreationInfo    CreationInfo    `json:"creationInfo"`
-	Packages        []SPDXPackage   `json:"packages"`
-	Relationships   []Relationship  `json:"relationships"`
+	SPDXID        string         `json:"spdxId"`
+	Name          string         `json:"name"`
+	Version       string         `json:"spdxVersion"`
+	CreationInfo  CreationInfo   `json:"creationInfo"`
+	Packages      []SPDXPackage  `json:"packages"`
+	Relationships []Relationship `json:"relationships"`
 }
 
 // CreationInfo represents the SPDX document creation metadata.
 type CreationInfo struct {
-	Created   string   `json:"created"`
-	Creators  []string `json:"creators"`
-	ListVersion int    `json:"listVersion,omitempty"`
+	Created     string   `json:"created"`
+	Creators    []string `json:"creators"`
+	ListVersion int      `json:"listVersion,omitempty"`
 }
 
 // SPDXPackage represents a package in an SPDX document.
 type SPDXPackage struct {
-	SPDXID            string `json:"spdxId"`
-	Name              string `json:"name"`
-	VersionInfo       string `json:"versionInfo,omitempty"`
-	DownloadLocation  string `json:"downloadLocation"`
-	LicenseConcluded  string `json:"licenseConcluded"`
-	LicenseDeclared   string `json:"licenseDeclared,omitempty"`
-	FilesAnalyzed     bool   `json:"filesAnalyzed"`
-	Supplier          string `json:"supplier,omitempty"`
-	Homepage          string `json:"homepage,omitempty"`
+	SPDXID           string `json:"spdxId"`
+	Name             string `json:"name"`
+	VersionInfo      string `json:"versionInfo,omitempty"`
+	DownloadLocation string `json:"downloadLocation"`
+	LicenseConcluded string `json:"licenseConcluded"`
+	LicenseDeclared  string `json:"licenseDeclared,omitempty"`
+	FilesAnalyzed    bool   `json:"filesAnalyzed"`
+	Supplier         string `json:"supplier,omitempty"`
+	Homepage         string `json:"homepage,omitempty"`
 }
 
 // Relationship represents a relationship between SPDX elements.
 type Relationship struct {
-	SPDXRefFrom   string `json:"spdxRefFrom"`
-	SPDXRefTo     string `json:"spdxRefTo,omitempty"`
-	Relationship  string `json:"relationshipType"`
+	SPDXRefFrom  string `json:"spdxRefFrom"`
+	SPDXRefTo    string `json:"spdxRefTo,omitempty"`
+	Relationship string `json:"relationshipType"`
 }
 
 // ParseSPDX parses an SPDX 2.3 JSON document from a file.
@@ -74,9 +74,9 @@ type CycloneDXParser struct{}
 
 // CycloneDXDocument represents a CycloneDX 1.5 document.
 type CycloneDXDocument struct {
-	Version    int             `json:"version"`
-	Metadata   Metadata        `json:"metadata,omitempty"`
-	Components []Component     `json:"components"`
+	Version      int          `json:"version"`
+	Metadata     Metadata     `json:"metadata,omitempty"`
+	Components   []Component  `json:"components"`
 	Dependencies []CycloneDep `json:"dependencies,omitempty"`
 }
 
@@ -88,13 +88,13 @@ type Metadata struct {
 
 // Component represents a software component.
 type Component struct {
-	BOMRef       string `json:"bom-ref"`
-	Name         string `json:"name"`
-	Version      string `json:"version,omitempty"`
-	Type         string `json:"type"`
-	Licenses     []LicenseRef `json:"licenses,omitempty"`
+	BOMRef       string        `json:"bom-ref"`
+	Name         string        `json:"name"`
+	Version      string        `json:"version,omitempty"`
+	Type         string        `json:"type"`
+	Licenses     []LicenseRef  `json:"licenses,omitempty"`
 	ExternalRefs []ExternalRef `json:"externalRefs,omitempty"`
-	Purl         string `json:"purl,omitempty"`
+	Purl         string        `json:"purl,omitempty"`
 }
 
 // LicenseRef represents a license in CycloneDX.

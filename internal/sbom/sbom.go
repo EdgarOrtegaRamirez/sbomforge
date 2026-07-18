@@ -15,48 +15,48 @@ import (
 type LicenseType string
 
 const (
-	LicenseMIT           LicenseType = "MIT"
-	LicenseApache20      LicenseType = "Apache-2.0"
-	LicenseGPL30         LicenseType = "GPL-3.0-only"
-	LicenseGPL20         LicenseType = "GPL-2.0-only"
-	LicenseBSD2Clause    LicenseType = "BSD-2-Clause"
-	LicenseBSD3Clause    LicenseType = "BSD-3-Clause"
-	LicenseISC           LicenseType = "ISC"
-	LicenseMPL20         LicenseType = "MPL-2.0"
-	LicenseLGPL30        LicenseType = "LGPL-3.0-only"
-	LicenseLGPL21        LicenseType = "LGPL-2.1-only"
-	LicenseAGPL30        LicenseType = "AGPL-3.0-only"
-	LicensePrivate       LicenseType = "PRIVATE"
-	LicenseUnknown       LicenseType = "NOASSERTION"
-	LicenseNone          LicenseType = "NONE"
+	LicenseMIT        LicenseType = "MIT"
+	LicenseApache20   LicenseType = "Apache-2.0"
+	LicenseGPL30      LicenseType = "GPL-3.0-only"
+	LicenseGPL20      LicenseType = "GPL-2.0-only"
+	LicenseBSD2Clause LicenseType = "BSD-2-Clause"
+	LicenseBSD3Clause LicenseType = "BSD-3-Clause"
+	LicenseISC        LicenseType = "ISC"
+	LicenseMPL20      LicenseType = "MPL-2.0"
+	LicenseLGPL30     LicenseType = "LGPL-3.0-only"
+	LicenseLGPL21     LicenseType = "LGPL-2.1-only"
+	LicenseAGPL30     LicenseType = "AGPL-3.0-only"
+	LicensePrivate    LicenseType = "PRIVATE"
+	LicenseUnknown    LicenseType = "NOASSERTION"
+	LicenseNone       LicenseType = "NONE"
 )
 
 // PackageRef represents a software package in the SBOM.
 type PackageRef struct {
-	Name       string     `json:"name"`
-	Version    string     `json:"version,omitempty"`
-	Supplier   string     `json:"supplier,omitempty"`
-	License    LicenseType `json:"licenseConcluded"`
-	SourceInfo string     `json:"sourceInfo,omitempty"`
-	FilesAnalyzed bool    `json:"filesAnalyzed"`
-	HomePage   string     `json:"homepage,omitempty"`
-	Summary    string     `json:"summary,omitempty"`
-	DownloadURL string    `json:"downloadLocation,omitempty"`
-	Sha256     string     `json:"sha256,omitempty"`
+	Name          string      `json:"name"`
+	Version       string      `json:"version,omitempty"`
+	Supplier      string      `json:"supplier,omitempty"`
+	License       LicenseType `json:"licenseConcluded"`
+	SourceInfo    string      `json:"sourceInfo,omitempty"`
+	FilesAnalyzed bool        `json:"filesAnalyzed"`
+	HomePage      string      `json:"homepage,omitempty"`
+	Summary       string      `json:"summary,omitempty"`
+	DownloadURL   string      `json:"downloadLocation,omitempty"`
+	Sha256        string      `json:"sha256,omitempty"`
 }
 
 // SBOM represents a complete Software Bill of Materials.
 type SBOM struct {
-	ID           string        `json:"SPDXID"`
-	Name         string        `json:"name"`
-	Version      string        `json:"version"`
-	Creator      string        `json:"creator"`
-	Created      string        `json:"created"`
-	DataLicense  string        `json:"dataLicense"`
-	DocumentName string        `json:"documentName"`
-	Namespace    string        `json:"documentNamespace"`
-	Packages     []PackageRef  `json:"packages,omitempty"`
-	Dependencies []Dependency  `json:"relationships,omitempty"`
+	ID           string       `json:"SPDXID"`
+	Name         string       `json:"name"`
+	Version      string       `json:"version"`
+	Creator      string       `json:"creator"`
+	Created      string       `json:"created"`
+	DataLicense  string       `json:"dataLicense"`
+	DocumentName string       `json:"documentName"`
+	Namespace    string       `json:"documentNamespace"`
+	Packages     []PackageRef `json:"packages,omitempty"`
+	Dependencies []Dependency `json:"relationships,omitempty"`
 }
 
 // Dependency represents a relationship between packages.

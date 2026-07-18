@@ -273,12 +273,12 @@ func convertToSBOM(data []byte, format string) *sbom.SBOM {
 		}
 		for _, pkg := range doc.Packages {
 			sbomDoc.AddPackage(sbom.PackageRef{
-				Name:       pkg.Name,
-				Version:    pkg.VersionInfo,
-				License:    sbom.LicenseType(pkg.LicenseConcluded),
+				Name:          pkg.Name,
+				Version:       pkg.VersionInfo,
+				License:       sbom.LicenseType(pkg.LicenseConcluded),
 				FilesAnalyzed: pkg.FilesAnalyzed,
-				HomePage:   pkg.Homepage,
-				DownloadURL: pkg.DownloadLocation,
+				HomePage:      pkg.Homepage,
+				DownloadURL:   pkg.DownloadLocation,
 			})
 		}
 		return sbomDoc
@@ -290,12 +290,12 @@ func convertToSBOM(data []byte, format string) *sbom.SBOM {
 			return nil
 		}
 		sbomDoc := &sbom.SBOM{
-			ID:          fmt.Sprintf("SPDXRef-%s", sanitizeName("cdx")),
-			Name:        sanitizeName("cdx"),
-			Version:     fmt.Sprintf("%d", doc.Version),
-			Creator:     strings.Join(doc.Metadata.Tools, ", "),
-			Created:     doc.Metadata.Timestamp,
-			DataLicense: "CC0-1.0",
+			ID:           fmt.Sprintf("SPDXRef-%s", sanitizeName("cdx")),
+			Name:         sanitizeName("cdx"),
+			Version:      fmt.Sprintf("%d", doc.Version),
+			Creator:      strings.Join(doc.Metadata.Tools, ", "),
+			Created:      doc.Metadata.Timestamp,
+			DataLicense:  "CC0-1.0",
 			DocumentName: sanitizeName("cdx"),
 		}
 		for _, comp := range doc.Components {
@@ -304,11 +304,11 @@ func convertToSBOM(data []byte, format string) *sbom.SBOM {
 				lic = comp.Licenses[0].ID
 			}
 			sbomDoc.AddPackage(sbom.PackageRef{
-				Name:       comp.Name,
-				Version:    comp.Version,
-				License:    sbom.LicenseType(lic),
+				Name:          comp.Name,
+				Version:       comp.Version,
+				License:       sbom.LicenseType(lic),
 				FilesAnalyzed: false,
-				DownloadURL: comp.Purl,
+				DownloadURL:   comp.Purl,
 			})
 		}
 		return sbomDoc
@@ -324,14 +324,14 @@ func scanProject(root string) ([]sbom.PackageRef, map[string][]string) {
 
 	// Look for common lock files
 	lockFiles := map[string]string{
-		"go.sum":        "go",
+		"go.sum":            "go",
 		"package-lock.json": "npm",
-		"yarn.lock":     "npm",
-		"requirements.txt": "python",
-		"pyproject.toml": "python",
-		"cargo.lock":    "rust",
-		"Gemfile.lock":  "ruby",
-		"composer.lock": "php",
+		"yarn.lock":         "npm",
+		"requirements.txt":  "python",
+		"pyproject.toml":    "python",
+		"cargo.lock":        "rust",
+		"Gemfile.lock":      "ruby",
+		"composer.lock":     "php",
 	}
 
 	found := false
@@ -424,8 +424,8 @@ func outputCycloneDX(doc *sbom.SBOM) {
 	}
 
 	type CDXDoc struct {
-		Version    int              `json:"version"`
-		Components []CDXComponent   `json:"components"`
+		Version    int            `json:"version"`
+		Components []CDXComponent `json:"components"`
 	}
 
 	components := make([]CDXComponent, len(doc.Packages))

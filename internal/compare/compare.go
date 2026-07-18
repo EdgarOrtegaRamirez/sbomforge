@@ -18,9 +18,9 @@ type DiffResult struct {
 
 // LicenseDiff represents a license difference for a package.
 type LicenseDiff struct {
-	Package  string
-	Left     string
-	Right    string
+	Package string
+	Left    string
+	Right   string
 }
 
 // Diff compares two SBOMs and returns the differences.
